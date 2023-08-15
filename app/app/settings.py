@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'paper_creation',
+    'get_paper',
 ]
 
 MIDDLEWARE = [
