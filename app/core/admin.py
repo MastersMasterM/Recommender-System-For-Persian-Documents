@@ -1,3 +1,5 @@
 from django.contrib import admin # noqa
+from .models import Paper
 
-# Register your models here.
+
+admin.register(Paper)
