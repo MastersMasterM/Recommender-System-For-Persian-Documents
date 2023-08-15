@@ -11,18 +11,20 @@ services:
     volumes:
       - ./app:/app
     command: >
-      sh -c "python manage.py migrate &&
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             celery -A app worker --loglevel=info --detach &&
              python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=changename
-      - REDIS_HOST=cache
-      - REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=changepass
     depends_on:
       - db
-      - cache
+      - redis
 
 
   db:
@@ -33,12 +35,16 @@ services:
       - POSTGRES_DB=devdb
       - POSTGRES_USER=devuser
       - POSTGRES_PASSWORD=changename
-  cache:
+
+  redis:
     image: redis:7.0-alpine
     restart: always
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    command: redis-server
     volumes:
-      - cache:/data
+      - redis:/var/lib/redis
+      - redis-config:/usr/local/etc/redis/redis.conf
+
 volumes:
   dev-db-data:
-  cache:
+  redis:
+  redis-config:
