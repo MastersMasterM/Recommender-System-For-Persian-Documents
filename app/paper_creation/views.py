@@ -1,3 +1,13 @@
-from django.shortcuts import render
+"""
+Paper_Creation Views
+"""
+from rest_framework.viewsets import ModelViewSet
 
-# Create your views here.
+from paper_creation.serializers import PaperSerializer
+from core.models import Paper
+
+
+class PaperView(ModelViewSet):
+    """View for manage recipe APIs"""
+    serializer_class = PaperSerializer
+    queryset = Paper.objects.all()
