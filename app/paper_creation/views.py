@@ -7,7 +7,7 @@ from paper_creation.serializers import PaperSerializer
 from core.models import Paper
 
 
-class PaperView(ModelViewSet):
+class PaperViewSet(ModelViewSet):
     """View for manage recipe APIs"""
     serializer_class = PaperSerializer
     queryset = Paper.objects.all()
