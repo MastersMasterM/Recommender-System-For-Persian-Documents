@@ -22,6 +22,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path(
         'api/docs/',
@@ -31,4 +32,7 @@ urlpatterns = [
     path('api/',
          include('paper_creation.urls'),
          name='paper_creation'),
+    path('get/',
+         include('get_paper.urls'),
+         name='get_paper'),
 ]

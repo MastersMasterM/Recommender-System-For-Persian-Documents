@@ -12,7 +12,7 @@ from .serializers import GetPaperSerializer
 
 import redis
 
-r = redis.Redis(db=2)
+r = redis.Redis(db=2,host='redis', port=6379)
 
 class GetPaperView(APIView):
     def get_object(self, pk):
@@ -22,14 +22,16 @@ class GetPaperView(APIView):
             except Paper.DoesNotExist:
                 raise Http404
 
-    def get(self, request, pk=None, format=None):
+    def get(self, request=None, pk=None, format=None):
         if pk is not None:
             instance = self.get_object(pk)
-            id_list = r.get(pk).decode().split(',') if r.get(pk) else []
-            recommended_papers = [self.get_object(id) for id in id_list]
+            id_list = r.get(str(pk))
+            id_list = id_list.decode('utf-8')
+            id_list = id_list.strip('][').split(', ')
+            recommended_papers = [self.get_object(i) for i in id_list]
             serializer = GetPaperSerializer(instance, context={'recommended_papers': recommended_papers})
             return Response(serializer.data)
         else:
-            queryset = Paper.objects.all()
+            queryset = Paper.objects.all()[:10]
             serializer = PaperSerializer(queryset, many=True)
             return Response(serializer.data)
