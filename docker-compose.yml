@@ -45,6 +45,16 @@ services:
       - redis:/var/lib/redis
       - redis-config:/usr/local/etc/redis/redis.conf
 
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      - app
+
+
 volumes:
   dev-db-data:
   redis:
