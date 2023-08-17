@@ -6,7 +6,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://app:8000/get/get_paper/');
+        const response = await fetch('http://localhost:8000/get/get_paper/');
         const data = await response.json();
         setItems(data);
       } catch (error) {
@@ -19,10 +19,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>Item List</h1>
+      <h1>Papers List</h1>
       <ul>
         {items.map((item) => (
-          <li key={item.id}>{item.name}</li>
+          <li key={item.id}>{item.title}</li>
         ))}
       </ul>
     </div>

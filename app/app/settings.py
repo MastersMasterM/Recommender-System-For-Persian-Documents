@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'core',
     'rest_framework',
     'drf_spectacular',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -137,6 +139,12 @@ REST_FRAMEWORK = {
 
 CELERY_BROKER_URL = 'redis://redis:6379/1'
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Replace with the actual URL of your React app
+CORS_ALLOWED_HOST = [
+    'http://localhost:3000/',  # Replace with the actual URL of your React app
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000/',
+)
+
+CORS_ORIGIN_ALLOW_ALL = False
