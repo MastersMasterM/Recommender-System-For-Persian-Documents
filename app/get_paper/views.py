@@ -13,7 +13,8 @@ from .serializers import GetPaperSerializer
 
 import redis
 
-r = redis.Redis(db=2,host='redis', port=6379)
+r = redis.Redis(db=2, host='redis', port=6379)
+
 
 class GetPaperView(APIView):
     def get_object(self, pk):
@@ -25,7 +26,7 @@ class GetPaperView(APIView):
 
     def get(self, request=None, pk=None, format=None):
 
-        query = request.GET.get('query')  # Get the search query from the request
+        query = request.GET.get('query')
 
         if pk is not None:
             instance = self.get_object(pk)
@@ -39,7 +40,6 @@ class GetPaperView(APIView):
             queryset = Paper.objects.all()
 
             if query:
-                # Apply search filter using OR logic on title and abstract fields
                 queryset = queryset.filter(Q(title__icontains=query))
 
             queryset = queryset.order_by('-id')[:15]
