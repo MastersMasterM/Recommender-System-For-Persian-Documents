@@ -39,7 +39,7 @@ const App = () => {
         <div className="list-container">
           <h1>لیست مقالات</h1>
           {items.length === 0 ? (
-            <p>مورد مشابهی یافت نشد</p>
+            <p>موردی یافت نشد</p>
           ) : (
             <ul>
               {items.map((item) => (
