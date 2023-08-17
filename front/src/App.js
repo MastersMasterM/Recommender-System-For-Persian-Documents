@@ -19,10 +19,12 @@ const App = () => {
 
   return (
     <div>
-      <h1>Papers List</h1>
+      <h1>لیست مقالات</h1>
       <ul>
         {items.map((item) => (
-          <li key={item.id}>{item.title}</li>
+          <li key={item.id}>
+            <a href="">{item.title}</a>
+          </li>
         ))}
       </ul>
     </div>

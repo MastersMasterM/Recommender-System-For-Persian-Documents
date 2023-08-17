@@ -140,11 +140,11 @@ REST_FRAMEWORK = {
 CELERY_BROKER_URL = 'redis://redis:6379/1'
 
 CORS_ALLOWED_HOST = [
-    'http://localhost:3000/',  # Replace with the actual URL of your React app
+    'http://localhost:3000',  # Replace with the actual URL of your React app
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000/',
+    'http://localhost:3000',
 )
 
 CORS_ORIGIN_ALLOW_ALL = False
