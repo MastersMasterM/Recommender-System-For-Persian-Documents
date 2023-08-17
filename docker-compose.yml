@@ -50,9 +50,20 @@ services:
       context: ./front
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '4000:3000'  # Change the port mapping
     volumes:
-      - ./front/src:/app/src
+      - ./front/src:/app/src  # Update the volume mapping
+    depends_on:
+      - app
+
+  managefront:
+    build:
+      context: ./managefront
+      dockerfile: Dockerfile
+    ports:
+      - '5000:3000'  # Change the port mapping
+    volumes:
+      - ./managefront/src:/app/src  # Update the volume mapping
     depends_on:
       - app
 

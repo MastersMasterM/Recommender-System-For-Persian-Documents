@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'core',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_spectacular',
     'paper_creation',
     'get_paper',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -135,16 +137,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
 CELERY_BROKER_URL = 'redis://redis:6379/1'
 
 CORS_ALLOWED_HOST = [
-    'http://localhost:3000',  # Replace with the actual URL of your React app
+    'http://localhost:4000',
+    'http://localhost:5000',
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
+    'http://localhost:4000',
+    'http://localhost:5000',
 )
 
 CORS_ORIGIN_ALLOW_ALL = False
+
+AUTH_USER_MODEL = 'core.User'
