@@ -96,7 +96,7 @@ const PaperDetail = () => {
       <p>{paper.sl_subject}</p>
       <h3>مقالات مشابه</h3>
       <ul>
-        {paper.recommended_papers.map((recommendedPaper) => (
+        {paper.recommended_papers.slice(1).map((recommendedPaper) => (
           <li key={recommendedPaper.id}>
             <Link to={`/paper/${recommendedPaper.id}`}>{recommendedPaper.title}</Link>
           </li>
