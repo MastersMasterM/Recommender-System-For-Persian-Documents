@@ -1,38 +1,59 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;800&display=swap');
+
+body {
+  background-color: royalblue;
+  font-family: 'Vazirmatn', sans-serif;
+  direction: rtl;
+  text-align: right;
+  color: #333; /* Updated text color */
+}
+
+h1 {
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  color: blueviolet;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(93, 18, 163);
+  text-decoration: underline;
+}
+
+.list-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  color: #333;
   text-align: center;
+  width: 80%;
+  box-sizing: border-box;
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.list-container:hover {
+  color: #dd2323;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.paper-detail {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  color: #333; /* Updated text color */
 }
