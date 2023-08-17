@@ -5,7 +5,7 @@ body {
   font-family: 'Vazirmatn', sans-serif;
   direction: rtl;
   text-align: right;
-  color: #333; /* Updated text color */
+  color: #333;
 }
 
 h1 {
@@ -29,6 +29,40 @@ a {
 a:hover {
   color: rgb(93, 18, 163);
   text-decoration: underline;
+}
+
+.search-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+  width: 80%;
+  box-sizing: border-box;
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+}
+
+.search-container input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.search-container button {
+  padding: 10px 20px;
+  background-color: blueviolet;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: rgb(93, 18, 163);
 }
 
 .list-container {
@@ -55,5 +89,5 @@ a:hover {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
-  color: #333; /* Updated text color */
+  color: #333;
 }

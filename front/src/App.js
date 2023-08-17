@@ -4,11 +4,12 @@ import './App.css';
 
 const App = () => {
   const [items, setItems] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/get/get_paper/');
+        const response = await fetch(`http://localhost:8000/get/get_paper/?query=${query}`);
         const data = await response.json();
         setItems(data);
       } catch (error) {
@@ -17,20 +18,37 @@ const App = () => {
     };
 
     fetchData();
-  }, []);
+  }, [query]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setQuery(e.target.elements.search.value);
+  };
 
   return (
     <Router>
       <div className="app">
+        <div className="search-container">
+          <h1>جست و جوی عنوان مقالات</h1>
+          <form onSubmit={handleSearch}>
+            <input type="text" name="search" placeholder="عنوان و یا کلمه در عنوان" />
+            <button type="submit">جست و جو</button>
+          </form>
+        </div>
+
         <div className="list-container">
           <h1>لیست مقالات</h1>
-          <ul>
-            {items.map((item) => (
-              <li key={item.id}>
-                <Link to={`/paper/${item.id}`}>{item.title}</Link>
-              </li>
-            ))}
-          </ul>
+          {items.length === 0 ? (
+            <p>مورد مشابهی یافت نشد</p>
+          ) : (
+            <ul>
+              {items.map((item) => (
+                <li key={item.id}>
+                  <Link to={`/paper/${item.id}`}>{item.title}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <Routes>
@@ -40,6 +58,7 @@ const App = () => {
     </Router>
   );
 };
+
 const PaperDetail = () => {
   const [paper, setPaper] = useState(null);
   const { id } = useParams();
@@ -69,7 +88,7 @@ const PaperDetail = () => {
   return (
     <div className="paper-detail">
       <h2>{paper.title}</h2>
-      <h3>چکیده:</h3>
+      <h3>چکیده</h3>
       <p>{paper.abstract}</p>
       <h3>موضوع سطح اول</h3>
       <p>{paper.fl_subject}</p>
