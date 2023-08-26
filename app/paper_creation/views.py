@@ -1,14 +1,19 @@
 """
 Paper_Creation Views
 """
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ViewSet
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from paper_creation.serializers import PaperSerializer
 from core.models import Paper
 from .tasks import export_paper_table
 
+import redis
+import json
+
+r = redis.Redis(db=2, host='redis', port=6379)
 
 class PaperViewSet(ModelViewSet):
     """View for managing paper APIs"""
@@ -33,3 +38,22 @@ class PaperViewSet(ModelViewSet):
         export_paper_table.delay()
 
         return response
+
+class RedisDataViewSet(ViewSet):
+    """View for Reloading Recommendation List"""
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        # Delete old data from Redis
+        r.flushdb()
+
+        # Load new data from JSON file
+        with open('data/list.json', 'r') as f:
+            res = json.load(f)
+
+        # Convert data to bytes and set in Redis
+        my_dict_bytes = {k: json.dumps(v).encode('utf-8') for k, v in res.items()}
+        r.mset(my_dict_bytes)
+
+        return Response({'message': 'Old data deleted. New data loaded to Redis.'})

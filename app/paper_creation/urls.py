@@ -18,4 +18,5 @@ app_name = 'paper_creation'
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('updatelist/', views.RedisDataViewSet.as_view({'get': 'list'}), name='updatelist'),
 ]
