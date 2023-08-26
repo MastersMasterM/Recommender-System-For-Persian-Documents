@@ -3,7 +3,7 @@ Defining the task of recomputing recommendations based on db
 """
 from core.models import Paper
 
-import csv
+import pickle
 from celery import shared_task
 
 
@@ -11,11 +11,10 @@ from celery import shared_task
 def export_paper_table():
     papers = Paper.objects.all()
 
-    with open('paper_data.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(['uid', 'title', 'abstract', 'fl_subject', 'sl_subject'])  # Add column headers
-
+    with open('paper_data.pkl', 'wb') as file:
+        data = []
         for paper in papers:
-            writer.writerow([paper.uid, paper.title, paper.abstract, paper.fl_subject, paper.sl_subject])  # Write data rows
+            data.append([paper.uid, paper.title, paper.abstract, paper.fl_subject, paper.sl_subject])
+        pickle.dump(data, file)
 
     print('Data export completed.')

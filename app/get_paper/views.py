@@ -31,9 +31,12 @@ class GetPaperView(APIView):
         if pk is not None:
             instance = self.get_object(pk)
             id_list = r.get(str(pk))
-            id_list = id_list.decode('utf-8')
-            id_list = id_list.strip('][').split(', ')
-            recommended_papers = [self.get_object(i) for i in id_list]
+            if id_list:
+                id_list = id_list.decode('utf-8')
+                id_list = id_list.strip('][').split(', ')
+                recommended_papers = [self.get_object(i) for i in id_list]
+            else:
+                recommended_papers = []
             serializer = GetPaperSerializer(instance, context={'recommended_papers': recommended_papers})
             return Response(serializer.data)
         else:
