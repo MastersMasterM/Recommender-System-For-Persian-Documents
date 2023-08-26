@@ -26,9 +26,6 @@ class PaperViewSet(ModelViewSet):
         else:
             serializer.save()  # Save the new object using the default primary key generation
 
-        # Execute the task after the object has been saved
-        export_paper_table.delay()
-
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
 
