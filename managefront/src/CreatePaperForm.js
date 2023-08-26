@@ -7,6 +7,7 @@ function CreatePaperForm() {
   const [flSubject, setFlSubject] = useState('');
   const [slSubject, setSlSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [submitUsed, setSubmitUsed] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +30,7 @@ function CreatePaperForm() {
 
       if (response.ok) {
         setMessage('پژوهش با موفقیت اضافه شد');
+        setSubmitUsed(true);
       } else {
         setMessage('عملیات ناموفق بود');
       }
@@ -37,7 +39,26 @@ function CreatePaperForm() {
       setMessage('عملیات ناموفق بود');
     }
   };
+  const handleUpdateList = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/updatelist/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${localStorage.getItem('token')}`,
+        },
+      });
 
+      if (response.ok) {
+        setMessage('لیست به‌روزرسانی شد');
+      } else {
+        setMessage('عملیات ناموفق بود');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setMessage('عملیات ناموفق بود');
+    }
+  };
   return (
     <div>
       <h1>اضافه کردن پژوهش</h1>
@@ -73,6 +94,9 @@ function CreatePaperForm() {
         />
         <button type="submit">ثبت</button>
       </form>
+      {submitUsed && (
+        <button onClick={handleUpdateList}>به‌روزرسانی لیست</button>
+      )}
       <p>{message}</p>
     </div>
   );
