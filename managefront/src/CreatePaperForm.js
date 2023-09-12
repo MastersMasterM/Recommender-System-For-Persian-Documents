@@ -29,7 +29,7 @@ function CreatePaperForm() {
       });
 
       if (response.ok) {
-        setMessage('پژوهش با موفقیت اضافه شد');
+        setMessage('پایان‌نامه با موفقیت اضافه شد');
         setSubmitUsed(true);
       } else {
         setMessage('عملیات ناموفق بود');
@@ -61,7 +61,7 @@ function CreatePaperForm() {
   };
   return (
     <div>
-      <h1>اضافه کردن پژوهش</h1>
+      <h1>اضافه کردن پایان‌نامه</h1>
       <form onSubmit={handleSubmit}>
       <input
           type="text"

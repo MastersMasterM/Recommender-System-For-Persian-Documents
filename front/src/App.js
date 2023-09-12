@@ -29,7 +29,7 @@ const App = () => {
     <Router>
       <div className="app">
         <div className="search-container">
-          <h1>جست و جوی عنوان مقالات</h1>
+          <h1>جست و جوی عنوان پایان‌نامه</h1>
           <form onSubmit={handleSearch}>
             <input type="text" name="search" placeholder="عنوان و یا کلمه در عنوان" />
             <button type="submit">جست و جو</button>
@@ -37,7 +37,7 @@ const App = () => {
         </div>
 
         <div className="list-container">
-          <h1>لیست مقالات</h1>
+          <h1>لیست پایان‌نامه‌ها</h1>
           {items.length === 0 ? (
             <p>موردی یافت نشد</p>
           ) : (
@@ -94,7 +94,7 @@ const PaperDetail = () => {
       <p>{paper.fl_subject}</p>
       <h3>موضوع سطح دوم</h3>
       <p>{paper.sl_subject}</p>
-      <h3>مقالات مشابه</h3>
+      <h3>پایان‌نامه‌های مشابه</h3>
       <ul>
         {paper.recommended_papers.slice(1).map((recommendedPaper) => (
           <li key={recommendedPaper.id}>
